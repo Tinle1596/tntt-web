@@ -1,6 +1,6 @@
-import home from './components/Home.vue';
+import Home from './components/Home.vue';
 
 
 export default [
-    {path: '/', component: home}
+    {path: '/', component: Home}
 ]
