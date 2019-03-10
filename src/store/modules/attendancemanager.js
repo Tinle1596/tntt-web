@@ -28,29 +28,42 @@ const state = {
             group: 'TN',
             attendance: 'Out'
         }
-    ],    
+    ],
+    selectedAttendance: "All"    
 }
 
 const getters = {
-    activeStudents: state => {
-        return state.students.filter(students => students.active)
-    },
-    inactiveStudents: state => {
-        return state.stduents.filter(students => students.active == false)
-    },
     allStudents: state => {
         return state.students
+    },
+    filteredStudents: state => {
+        var attendance = state.selectedAttendance;
+
+        if(attendance === "All"){
+            return state.students;
+        } else {
+            return state.students.filter(function(student) {
+                return student.attendance === state.selectedAttendance;
+            })
+        }
     }
 }
 
 const mutations = {
     assignCurrentList(state, currentStudentList){
         state.currentStudentList = currentStudentList
-    }
+    },
+    changeCurrentList: (state, payload) => {
+        state.selectedAttendance = payload;
+    }    
 }
 
 const actions = {
-   
+   changeCurrentList: (context, payload) => {
+       setTimeout(function(){
+        context.commit('changeCurrentList', payload)
+       },)
+   }
 }
 
 

@@ -1,10 +1,10 @@
 <template>
     <div id="students">
         test from student
-        <div class= 'filter'>
-            <label><input type="radio" name="filter" v-model="selectedAttendance" value="All">All</label>
-            <label><input type="radio" name="filter" v-model="selectedAttendance" value="In">In</label>
-            <label><input type="radio" name="filter" v-model="selectedAttendance" value="Out">Out</label>
+        <div class= 'filter'>            
+            <button v-on:click="changeCurrentList('All')">All</button>
+            <button v-on:click="changeCurrentList('In')">Check-In</button>
+            <button v-on:click="changeCurrentList('Out')">Check-Out</button>
         </div>        
         <ul>
             <div v-for="student in filteredStudents" :key="student.id">
@@ -30,26 +30,19 @@ import { mapGetters } from 'vuex'
         data() {
             return {
                 
-                selectedAttendance: ""
             }
         },
         computed:{
             ...mapGetters({
-                students: 'allStudents'
-            }),
-             filteredStudents: function() {
-            var vm = this;
-            var attendance = vm.selectedAttendance;
-
-            if(attendance === "All"){
-                return vm.students;
-            } else {
-                return vm.students.filter(function(student) {
-                    return student.attendance === vm.selectedAttendance;
-                })
+                students: 'allStudents',
+                filteredStudents: 'filteredStudents'
+            }),        
+        },     
+        methods: {
+            changeCurrentList: function(payload){
+                this.$store.dispatch('changeCurrentList', payload)
             }
-        }
-        },        
+        }   
     }
 </script>
 
