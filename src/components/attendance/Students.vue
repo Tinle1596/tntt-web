@@ -1,11 +1,5 @@
 <template>
-    <div id="students">
-        test from student
-        <div class= 'filter'>            
-            <button v-on:click="changeCurrentList('All')">All</button>
-            <button v-on:click="changeCurrentList('In')">Check-In</button>
-            <button v-on:click="changeCurrentList('Out')">Check-Out</button>
-        </div>        
+    <div id="students">        
         <ul>
             <div v-for="student in filteredStudents" :key="student.id">
                 <div class="student-card">
@@ -37,12 +31,7 @@ import { mapGetters } from 'vuex'
                 students: 'allStudents',
                 filteredStudents: 'filteredStudents'
             }),        
-        },     
-        methods: {
-            changeCurrentList: function(payload){
-                this.$store.dispatch('changeCurrentList', payload)
-            }
-        }   
+        },             
     }
 </script>
 

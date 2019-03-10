@@ -1,15 +1,18 @@
 <template>
-    <div id="attendance-manager">     
+    <div id="attendance-manager">
+        <student-dashboard></student-dashboard>
         <students></students>
     </div>
 </template>
 
 <script>
-import students from './Students'
+import Students from './Students'
+import StudentDashboard from './StudentDashBoard'
 export default {
     name: 'AttendanceManager',
     components: {
-        students
+        Students,
+        StudentDashboard
     },
     data() {
         return {
