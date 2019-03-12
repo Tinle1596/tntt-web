@@ -1,4 +1,3 @@
-
 // initial state
 const state = {
     sort_by: 'id',
@@ -29,7 +28,8 @@ const state = {
             attendance: 'Out'
         }
     ],
-    selectedAttendance: "All"    
+    selectedAttendance: "All",
+    searchStudent: "John"
 }
 
 const getters = {
@@ -46,6 +46,18 @@ const getters = {
                 return student.attendance === state.selectedAttendance;
             })
         }
+    },
+    filteredSearchStudents: (state, getters) => {
+        var studentSearch = state.searchStudent;
+        var filteredStudents = getters.filteredStudents;
+
+        if(studentSearch){
+            return filteredStudents.filter((student) =>{
+                return student.firstName.startsWith(studentSearch);
+            })
+        } else {
+            return filteredStudents;
+        }        
     }
 }
 
@@ -53,15 +65,15 @@ const mutations = {
     assignCurrentList(state, currentStudentList){
         state.currentStudentList = currentStudentList
     },
-    changeCurrentList: (state, payload) => {
+    FILTER_ATTENDANCE_LIST: (state, payload) => {
         state.selectedAttendance = payload;
     }    
 }
 
 const actions = {
-   changeCurrentList: (context, payload) => {
+   filterStudentAttendance: (context, payload) => {
        setTimeout(function(){
-        context.commit('changeCurrentList', payload)
+        context.commit('FILTER_ATTENDANCE_LIST', payload)
        },)
    }
 }

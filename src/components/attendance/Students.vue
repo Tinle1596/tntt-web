@@ -1,7 +1,7 @@
 <template>
     <div id="students">        
         <ul>
-            <div v-for="student in filteredStudents" :key="student.id">
+            <div v-for="student in filteredSearchStudents" :key="student.id">
                 <div class="student-card">
                     <div class="student-info">
                         <h2> {{student.firstName}} {{ student.lastName }}</h2>
@@ -27,10 +27,11 @@ import { mapGetters } from 'vuex'
             }
         },
         computed:{
-            ...mapGetters({
-                students: 'allStudents',
-                filteredStudents: 'filteredStudents'
-            }),        
+            ...mapGetters([
+                'allStudents',
+                'filteredStudents',
+                'filteredSearchStudents'
+            ]),        
         },             
     }
 </script>
