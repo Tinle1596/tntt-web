@@ -29,13 +29,10 @@ const state = {
         }
     ],
     selectedAttendance: "All",
-    searchStudent: "John"
+    searchWord: null
 }
 
 const getters = {
-    allStudents: state => {
-        return state.students
-    },
     filteredStudents: state => {
         var attendance = state.selectedAttendance;
 
@@ -48,26 +45,27 @@ const getters = {
         }
     },
     filteredSearchStudents: (state, getters) => {
-        var studentSearch = state.searchStudent;
+        var searchWord = state.searchWord;
         var filteredStudents = getters.filteredStudents;
 
-        if(studentSearch){
+        if(searchWord){
             return filteredStudents.filter((student) =>{
-                return student.firstName.startsWith(studentSearch);
+                return student.firstName.toLowerCase().includes(searchWord);
             })
         } else {
             return filteredStudents;
         }        
-    }
+    },
+    getSearchWord: (state) => state.searchWord
 }
 
 const mutations = {
-    assignCurrentList(state, currentStudentList){
-        state.currentStudentList = currentStudentList
-    },
     FILTER_ATTENDANCE_LIST: (state, payload) => {
         state.selectedAttendance = payload;
-    }    
+    },
+    UPDATE_SEARCH_WORD: (state, word) => {
+        state.searchWord = word.toLowerCase();
+    }     
 }
 
 const actions = {
@@ -75,6 +73,9 @@ const actions = {
        setTimeout(function(){
         context.commit('FILTER_ATTENDANCE_LIST', payload)
        },)
+   },
+   updateSearchWord:(context, payload) => {
+       context.commit('UPDATE_SEARCH_WORD', payload)
    }
 }
 

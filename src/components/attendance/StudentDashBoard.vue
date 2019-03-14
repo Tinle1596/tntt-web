@@ -5,7 +5,7 @@
             <button v-on:click="changeCurrentList('In')">Check-In</button>
             <button v-on:click="changeCurrentList('Out')">Check-Out</button>
             <div class="search">
-                <input type="text" placeholder="search student">
+                <input type="search" v-model="searchWord"  required/>
             </div>
         </div>
     </div>
@@ -18,7 +18,17 @@
             changeCurrentList: function(payload){
                 this.$store.dispatch('filterStudentAttendance', payload)
             }
-        }
+        },
+        computed: {
+            searchWord:{
+                get(){
+                    return this.$store.state.searchWord
+                },
+                set(value){
+                    this.$store.dispatch('updateSearchWord', value.toLowerCase())
+                }
+            }
+        },
     }
 </script>
 
