@@ -1,9 +1,9 @@
 <template>
     <div id="student-dashboard">
         <div class="dashboard-container">
-            <button v-on:click="changeCurrentList('All')">All</button>
-            <button v-on:click="changeCurrentList('In')">Check-In</button>
-            <button v-on:click="changeCurrentList('Out')">Check-Out</button>
+            <button v-on:click="changeCurrentList(null)">All</button>
+            <button v-on:click="changeCurrentList(true)">Check-In</button>
+            <button v-on:click="changeCurrentList(false)">Check-Out</button>
             <div class="search">
                 <input type="search" v-model="searchWord"  required/>
             </div>

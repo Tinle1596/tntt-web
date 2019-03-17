@@ -9,7 +9,7 @@ const state = {
             lastName: 'Nguyen',
             age: 11,
             group: 'TN',
-            attendance: 'In',
+            attendance: true,
         },
         {
             id: 2,
@@ -17,7 +17,7 @@ const state = {
             lastName: 'Tran',
             age: 17,
             group: 'HS',
-            attendance: 'In',
+            attendance: true,
         },
         {
             id: 3,
@@ -25,10 +25,10 @@ const state = {
             lastName: 'Nguyen',
             age: 9,
             group: 'TN',
-            attendance: 'Out'
+            attendance: false
         }
     ],
-    selectedAttendance: "All",
+    selectedAttendance: null,
     searchWord: null
 }
 
@@ -36,7 +36,7 @@ const getters = {
     filteredStudents: state => {
         var attendance = state.selectedAttendance;
 
-        if(attendance === "All"){
+        if(attendance === null){
             return state.students;
         } else {
             return state.students.filter(function(student) {

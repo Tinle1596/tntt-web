@@ -8,7 +8,10 @@
                     </div>
                     <div class="student-image">
                         <img src="https://pbs.twimg.com/profile_images/737087391882567680/oNV5mIrx.jpg" alt="">
-                    </div>                    
+                    </div>   
+                    <div class="attendance-button">
+                        <attendanceButton></attendanceButton>
+                    </div>
                 </div>
             </div>
         </ul>
@@ -17,9 +20,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import attendanceButton from './common/AttendanceButton'
+
     export default {
         name: 'Students',
         props:{
+        },
+        components:{
+            attendanceButton
         },
         data() {
             return {
@@ -28,8 +36,6 @@ import { mapGetters } from 'vuex'
         },
         computed:{
             ...mapGetters([
-                'allStudents',
-                'filteredStudents',
                 'filteredSearchStudents'
             ]),        
         },             
@@ -50,11 +56,22 @@ img{
 }
 .student-card{
     background: #45A29E;
+    width: 25pc;
+}
 
+.attendance-button{
+    background: blue;
+    float: right;
+    border: 20px white;
+    padding: 5px;
+    height: 20px;
+    width: 150px;
 }
 
 label{
     display: block;
     line-height: 1.5em;
 }
+
+
 </style>
