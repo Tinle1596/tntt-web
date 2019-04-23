@@ -1,13 +1,18 @@
 <template>
     <div id="student-dashboard">
-        <div class="dashboard-container">
+        <b-navbar toggleable="lg" type="dark" variant="dark">
+            <b-nav-form>
+                <b-form-input class="mr-sm-2" placeholder="Search" v-model="searchWord"></b-form-input>
+            </b-nav-form>
+        </b-navbar>
+        <!-- <div class="dashboard-container">
             <button v-on:click="changeCurrentList(null)">All</button>
             <button v-on:click="changeCurrentList(true)">Check-In</button>
             <button v-on:click="changeCurrentList(false)">Check-Out</button>
             <div class="search">
                 <input type="search" v-model="searchWord"  required/>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

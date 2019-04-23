@@ -1,20 +1,12 @@
 <template>
-    <div id="students">        
-        <ul>
-            <div v-for="student in filteredSearchStudents" :key="student.id">
-                <div class="student-card">
-                    <div class="student-info">
-                        <h2> {{student.firstName}} {{ student.lastName }}</h2>
-                    </div>
-                    <div class="student-image">
-                        <img src="https://pbs.twimg.com/profile_images/737087391882567680/oNV5mIrx.jpg" alt="">
-                    </div>   
-                    <div class="attendance-button">
-                        <attendanceButton></attendanceButton>
-                    </div>
-                </div>
-            </div>
-        </ul>
+    <div id="students">                
+        <div v-for="student in filteredSearchStudents" :key="student.id">
+            <b-card bg-variant="dark" text-variant="light" style="max-width: 90%; max-height: 10%;">
+                <b-col>
+                    <b-card-img scr="https://pbs.twimg.com/profile_images/737087391882567680/oNV5mIrx.jpg" class="rounded-0" ></b-card-img>
+                </b-col>
+            </b-card>          
+        </div>        
     </div>
 </template>
 
