@@ -3,7 +3,7 @@
         <div v-for="student in filteredSearchStudents" :key="student.id">
             <b-card bg-variant="dark" text-variant="light" style="max-width: 90%; max-height: 10%;">
                 <b-col>
-                    <b-card-img scr="https://pbs.twimg.com/profile_images/737087391882567680/oNV5mIrx.jpg" class="rounded-0" ></b-card-img>
+                    
                 </b-col>
             </b-card>          
         </div>        

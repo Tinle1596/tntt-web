@@ -1,18 +1,20 @@
 <template>
     <div id="student-dashboard">
+        <!-- <div>
+            <h5>TNTT Attendance Manager</h5>
+        </div> -->
         <b-navbar toggleable="lg" type="dark" variant="dark">
             <b-nav-form>
-                <b-form-input class="mr-sm-2" placeholder="Search" v-model="searchWord"></b-form-input>
+                <b-form-input class="mr-sm-2" size="sm" placeholder="Search" v-model="searchWord"></b-form-input>
             </b-nav-form>
-        </b-navbar>
-        <!-- <div class="dashboard-container">
-            <button v-on:click="changeCurrentList(null)">All</button>
-            <button v-on:click="changeCurrentList(true)">Check-In</button>
-            <button v-on:click="changeCurrentList(false)">Check-Out</button>
-            <div class="search">
-                <input type="search" v-model="searchWord"  required/>
+            <div class="float-left">
+                 <b-button-group size="sm">
+                <b-button v-on:click="changeCurrentList(null)"> All </b-button>
+                <b-button v-on:click="changeCurrentList(true)"> In </b-button>
+                <b-button v-on:click="changeCurrentList(false)"> Out </b-button>
+            </b-button-group>
             </div>
-        </div> -->
+        </b-navbar>
     </div>
 </template>
 
