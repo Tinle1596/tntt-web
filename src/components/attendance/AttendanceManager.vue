@@ -1,17 +1,17 @@
 <template>
     <div id="attendance-manager">
         <student-dashboard></student-dashboard>
-        <students></students>
+        <student-card></student-card>
     </div>
 </template>
 
 <script>
-import Students from './Students'
+import StudentCard from './StudentCard'
 import StudentDashboard from './StudentDashBoard'
 export default {
     name: 'AttendanceManager',
     components: {
-        Students,
+        StudentCard,
         StudentDashboard
     },
     data() {
