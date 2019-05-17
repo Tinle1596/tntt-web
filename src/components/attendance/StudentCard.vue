@@ -50,6 +50,9 @@ export default {
   data() {
     return {};
   },
+  created(){
+    this.$store.dispatch('retrieveStudents ')
+  },
   computed: {
     ...mapGetters(["filteredSearchStudents"])
   }

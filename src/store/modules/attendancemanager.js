@@ -1,33 +1,10 @@
 // initial state
+import db from '../../config/firebase'
+
 const state = {
     sort_by: 'id',
     sort_ascending: true,
-    students: [
-        {
-            id: 1,
-            firstName: 'John',
-            lastName: 'Nguyen',
-            age: 11,
-            group: 'TN',
-            attendance: true,
-        },
-        {
-            id: 2,
-            firstName: 'Jenny',
-            lastName: 'Tran',
-            age: 17,
-            group: 'HS',
-            attendance: true,
-        },
-        {
-            id: 3,
-            firstName: 'Jacob',
-            lastName: 'Nguyen',
-            age: 9,
-            group: 'TN',
-            attendance: false
-        }
-    ],
+    students: [],
     selectedAttendance: null,
     searchWord: null
 }
@@ -65,7 +42,10 @@ const mutations = {
     },
     UPDATE_SEARCH_WORD: (state, word) => {
         state.searchWord = word.toLowerCase();
-    }     
+    },
+    RETRIEVE_STUDENTS:(state, students) => {
+        state.students = students
+    }
 }
 
 const actions = {
@@ -76,7 +56,27 @@ const actions = {
    },
    updateSearchWord:(context, payload) => {
        context.commit('UPDATE_SEARCH_WORD', payload)
-   }
+   },
+   retrieveStudents(context){
+       db.collection('students').get()
+       .then(querySnapshot => {
+           let tempStudents = []
+            querySnapshot.forEach(doc => {                
+                const data = {
+                    id: doc.id,
+                    age: doc.data().age,
+                    firstName: doc.data().firstName,
+                    group: doc.data().group,
+                    isActive: doc.data().isActive,
+                    lastName: doc.data().lastName,
+                    phoneNumber: doc.data().phoneNumber,
+                    sex: doc.data().sex                   
+                }
+                tempStudents.push(data)
+            })
+            context.commit('RETRIEVE_STUDENTS', tempStudents)
+       })    
+   },
 }
 
 
