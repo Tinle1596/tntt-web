@@ -19,14 +19,14 @@
                 </b-card-text>
               </b-col>
               <b-col cols="auto" align-self="end">
-                <div v-if="student.attendance === true">
-                  <b-button variant="danger">
-                    Check-Out
+                <div v-if="student.isActive === true">
+                  <b-button variant="success">
+                    Checked-in
                   </b-button>
                 </div>
                 <div v-else>
-                  <b-button variant="success">
-                    Check-In
+                  <b-button variant="danger">
+                    Checked-Out
                   </b-button>
                 </div>
               </b-col>
@@ -51,7 +51,7 @@ export default {
     return {};
   },
   created(){
-    this.$store.dispatch('retrieveStudents ')
+    this.$store.dispatch('retrieveStudents')
   },
   computed: {
     ...mapGetters(["filteredSearchStudents"])

@@ -17,7 +17,7 @@ const getters = {
             return state.students;
         } else {
             return state.students.filter(function(student) {
-                return student.attendance === state.selectedAttendance;
+                return student.isActive === state.selectedAttendance;
             })
         }
     },
