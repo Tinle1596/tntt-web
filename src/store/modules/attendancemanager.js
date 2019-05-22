@@ -43,9 +43,13 @@ const mutations = {
     UPDATE_SEARCH_WORD: (state, word) => {
         state.searchWord = word.toLowerCase();
     },
-    RETRIEVE_STUDENTS:(state, students) => {
-        state.students = students
-    }
+    RETRIEVE_STUDENTS: (state, students) => {
+        state.students = students;
+    },
+    TOGGLE_ATTENDANCE: (state, student) => {        
+        const index = state.students.findIndex(item => item.id == student.id)        
+        state.students[index].isActive = student.isActive
+    },
 }
 
 const actions = {
@@ -54,10 +58,10 @@ const actions = {
         context.commit('FILTER_ATTENDANCE_LIST', payload)
        },)
    },
-   updateSearchWord:(context, payload) => {
+   updateSearchWord: (context, payload) => {
        context.commit('UPDATE_SEARCH_WORD', payload)
    },
-   retrieveStudents(context){
+   retrieveStudents: (context) => {
        db.collection('students').get()
        .then(querySnapshot => {
            let tempStudents = []
@@ -76,6 +80,21 @@ const actions = {
             })
             context.commit('RETRIEVE_STUDENTS', tempStudents)
        })    
+   },
+   toggleAttendance:(context, student) => {  
+       var tempStudent = student
+       if(student.isActive === false){
+            tempStudent.isActive = true;
+       }
+       else{
+            tempStudent.isActive = false;
+       }
+       db.collection('students').doc(student.id).update({
+           isActive: tempStudent.isActive
+       })
+       .then(() => {           
+           context.commit('TOGGLE_ATTENDANCE', tempStudent)
+       })   
    },
 }
 
