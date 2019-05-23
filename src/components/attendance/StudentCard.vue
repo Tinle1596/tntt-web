@@ -15,8 +15,7 @@
               </b-col>
               <b-col cols="3">
                 <b-card-text>      
-                  {{ student.group }}
-                  {{ student.isActive }}
+                  
                 </b-card-text>
               </b-col>
               <b-col cols="auto" align-self="end">
@@ -54,6 +53,7 @@ export default {
   created(){
     //this.$store.dispatch('initRealtimeListeners')
     this.$store.dispatch('retrieveStudents')
+    this.$store.dispatch('retrieveStudentsInfo')
   },
   computed: {
     ...mapGetters([

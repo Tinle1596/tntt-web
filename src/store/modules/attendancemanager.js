@@ -4,7 +4,9 @@ import db from '../../config/firebase'
 const state = {
     sort_by: 'id',
     sort_ascending: true,
-    students: [],
+    studentsAttendance: [],  
+    studentsInfo: [],
+    students:[],  
     selectedAttendance: null,
     searchWord: null
 }
@@ -43,11 +45,20 @@ const mutations = {
     UPDATE_SEARCH_WORD: (state, word) => {
         state.searchWord = word.toLowerCase();
     },
-    RETRIEVE_STUDENTS: (state, students) => {
-        state.students = students;
+    RETRIEVE_STUDENT_ATTENDANCE: (state, students) => {
+        state.studentsAttendance = students;
+    },    
+    MERGE_STUDENT_STUDENTINFO: (state, studentsInfo) => {        
+        state.studentsInfo = studentsInfo;
+        for(let i=0; i<state.studentsAttendance.length; i++) {
+            state.students.push({
+                ...state.studentsAttendance[i],
+                ...(studentsInfo.find((itmInner) => itmInner.studentId === state.studentsAttendance[i].studentId))
+            });
+        }        
     },
     TOGGLE_ATTENDANCE: (state, student) => {        
-        const index = state.students.findIndex(item => item.id == student.id)        
+        const index = state.students.findIndex(item => item.attendanceId == student.attendanceId)        
         state.students[index].isActive = student.isActive
     },
 }
@@ -61,26 +72,42 @@ const actions = {
    updateSearchWord: (context, payload) => {
        context.commit('UPDATE_SEARCH_WORD', payload)
    },
-   retrieveStudents: (context) => {
+   retrieveStudents:(context) =>{
+        db.collection('studentAttendance').get()
+            .then(querySnapshot => {
+                let tempStudents = []
+                querySnapshot.forEach(doc => {
+                    const data = {
+                        attendanceId: doc.id,
+                        studentId: doc.data().studentId,
+                        isActive: doc.data().isActive,
+                        timestampIn: doc.data().timestampIn,
+                        timestampOut: doc.data().timestampOut
+                    }
+                    tempStudents.push(data)
+                })
+                context.commit('RETRIEVE_STUDENT_ATTENDANCE', tempStudents)
+            })
+        },
+   retrieveStudentsInfo: (context) =>{
        db.collection('students').get()
-       .then(querySnapshot => {
-           let tempStudents = []
-            querySnapshot.forEach(doc => {                
+        .then(querySnapshot => {
+            let tempStudentsInfo = []
+            querySnapshot.forEach(doc => {
                 const data = {
-                    id: doc.id,
+                    studentId: doc.id,
                     age: doc.data().age,
                     firstName: doc.data().firstName,
-                    group: doc.data().group,
-                    isActive: doc.data().isActive,
+                    group: doc.data().group,                    
                     lastName: doc.data().lastName,
                     phoneNumber: doc.data().phoneNumber,
-                    sex: doc.data().sex                   
+                    sex: doc.data().sex
                 }
-                tempStudents.push(data)
+                tempStudentsInfo.push(data)
             })
-            context.commit('RETRIEVE_STUDENTS', tempStudents)
-       })    
-   },
+            context.commit('MERGE_STUDENT_STUDENTINFO', tempStudentsInfo)
+        })
+   },   
    toggleAttendance:(context, student) => {  
        var tempStudent = student
        if(student.isActive === false){
@@ -89,7 +116,7 @@ const actions = {
        else{
             tempStudent.isActive = false;
        }
-       db.collection('students').doc(student.id).update({
+       db.collection('studentAttendance').doc(student.attendanceId).update({
            isActive: tempStudent.isActive
        })
        .then(() => {           
