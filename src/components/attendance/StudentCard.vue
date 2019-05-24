@@ -51,9 +51,8 @@ export default {
     return {};
   },
   created(){
-    //this.$store.dispatch('initRealtimeListeners')
+    this.$store.dispatch('initRealtimeListeners')
     this.$store.dispatch('retrieveStudents')
-    this.$store.dispatch('retrieveStudentsInfo')
   },
   computed: {
     ...mapGetters([
