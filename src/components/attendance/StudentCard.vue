@@ -15,18 +15,18 @@
               </b-col>
               <b-col cols="3">
                 <b-card-text>      
-                  {{ student.group }}
+                  
                 </b-card-text>
               </b-col>
               <b-col cols="auto" align-self="end">
-                <div v-if="student.attendance === true">
-                  <b-button variant="danger">
-                    Check-Out
+                <div v-if="student.isActive === true">
+                  <b-button variant="success" v-on:click="toggleAttendance(student)">
+                    Checked-in
                   </b-button>
                 </div>
                 <div v-else>
-                  <b-button variant="success">
-                    Check-In
+                  <b-button variant="danger" v-on:click="toggleAttendance(student)">
+                    Checked-Out
                   </b-button>
                 </div>
               </b-col>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 //import attendanceButton from './common/AttendanceButton'
 
 export default {
@@ -50,8 +50,22 @@ export default {
   data() {
     return {};
   },
+  created(){
+    this.$store.dispatch('initRealtimeListeners')
+    this.$store.dispatch('retrieveStudents')
+  },
   computed: {
-    ...mapGetters(["filteredSearchStudents"])
+    ...mapGetters([
+      'filteredSearchStudents'
+      ]),
+    ...mapActions([
+      //'updateAttendance'
+    ]),
+  },
+  methods: {
+    toggleAttendance(student) {            
+      this.$store.dispatch('toggleAttendance', student)
+    }
   }
 };
 </script>
