@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Sidebar from './components/layout/Sidebar'
-import SidebarToggle from './components/layout/SidebarToggle'
+import Sidebar from './components/layout/sidebar/Sidebar'
+import SidebarToggle from './components/layout/sidebar/SidebarToggle'
 
 export default {
   name: 'app',

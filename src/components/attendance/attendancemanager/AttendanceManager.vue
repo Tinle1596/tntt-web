@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import StudentCard from './StudentCard'
-import StudentDashboard from './StudentDashBoard'
+import StudentCard from './StudentCard.vue'
+import StudentDashboard from './StudentDashBoard.vue'
 export default {
     name: 'AttendanceManager',
     components: {
