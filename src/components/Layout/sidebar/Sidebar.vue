@@ -1,15 +1,24 @@
 <template>
-  <div :class="$style.sidebar"/>
+  <div :class="$style.sidebar">
+    <div>
+      Welcome, "insert name here"
+    </div>
+      <sidebar-nav></sidebar-nav>
+    </div>  
 </template>
 
 <script>
   import {TweenMax, Power4} from 'gsap'
+  import SidebarNav from './SidebarNav.vue'
   export default {
     name: 'sidebar',
     mounted () {
       TweenMax.set(this.$el, {
         x: this.$el.offsetWidth
       })
+    },
+    components: {
+      SidebarNav
     },
     computed: {
       open () {

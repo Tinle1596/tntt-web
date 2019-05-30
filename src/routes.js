@@ -1,9 +1,11 @@
 import Home from './components/Home.vue'
-import Attendance from './components/Attendance.vue'
+import AttendanceManage from './components/AttendanceManage.vue'
+import AttendanceView from './components/AttendanceView.vue'
 
 
 export default [
     {path: '/', component: Home},
-    {path: '/attendance', component: Attendance}
+    {path: '/attendancemanager', component: AttendanceManage},
+    {path: '/attendanceviewer', component: AttendanceView}
 
 ]

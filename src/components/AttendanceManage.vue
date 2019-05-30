@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AttendanceManager from './attendance/AttendanceManager'
+import AttendanceManager from './attendance/attendancemanager/AttendanceManager.vue'
 
 export default {
     name: 'Attendance',
