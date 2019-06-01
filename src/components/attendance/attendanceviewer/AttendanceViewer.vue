@@ -5,7 +5,7 @@
         </div> -->
         <b-navbar toggleable="lg" type="dark" variant="dark">
             <b-nav-form>
-                <b-form-input class="mr-sm-2" size="sm" placeholder="Search" v-model="searchWord"></b-form-input>
+                <b-form-input class="mr-sm-2" size="sm" placeholder="Search"></b-form-input>
             </b-nav-form>            
         </b-navbar>
     </div>
