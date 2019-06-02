@@ -1,15 +1,21 @@
 <template>
   <div>
     <b-container>
-      <b-col><router-link to="/"> Home </router-link></b-col>    
-      <b-col><router-link to="/attendancemanager"> Attendance Manager </router-link></b-col>
-      <b-col><router-link to="/attendanceviewer"> Attendance Viewer </router-link></b-col>
+      <b-col @click="toggleSidebar"><router-link to="/"> Home </router-link></b-col>    
+      <b-col @click="toggleSidebar"><router-link to="/attendancemanager"> Attendance Manager </router-link></b-col>
+      <b-col @click="toggleSidebar"><router-link to="/attendanceviewer"> Attendance Viewer </router-link></b-col>
     </b-container>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toggleSidebar () {
+      this.$store.dispatch('toggleSidebar')
+    }
+  }
+};
 </script>
 
 <style scoped>
