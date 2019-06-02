@@ -22,7 +22,7 @@
     export default {
         name:'StudentDashBoard',
         methods:{
-            changeCurrentList: payload => {
+            changeCurrentList: function(payload) {
                 this.$store.dispatch('filterStudentAttendance', payload)
             }
         },
