@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import ui from './modules/ui'
 import attendancemanager from './modules/attendancemanager'
 import atteendanceviewer from './modules/attendanceviewer'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     ui,
     attendancemanager,
-    atteendanceviewer    
+    atteendanceviewer,
+    auth    
   },
   strict: false
 })

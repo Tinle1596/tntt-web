@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.sidebar">
     <div>
-      Welcome, "insert name here"
+      <auth></auth>
     </div>
       <sidebar-nav></sidebar-nav>
     </div>  
@@ -10,6 +10,8 @@
 <script>
   import {TweenMax, Power4} from 'gsap'
   import SidebarNav from './SidebarNav.vue'
+  import Auth from '../../common/Auth.vue'
+
   export default {
     name: 'sidebar',
     mounted () {
@@ -18,7 +20,8 @@
       })
     },
     components: {
-      SidebarNav
+      SidebarNav,
+      Auth
     },
     computed: {
       open () {
