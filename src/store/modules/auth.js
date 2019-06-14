@@ -30,7 +30,7 @@ const mutations = {
 // actions
 const actions = {
     retrieveCredentials: (context) => {               
-        db.auth.onAuthStateChanged(user => {            
+        db.auth().onAuthStateChanged(user => {            
             if (user) {
                 const {
                     displayName,
