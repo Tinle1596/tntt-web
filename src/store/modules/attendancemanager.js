@@ -1,5 +1,5 @@
 // initial state
-import db from '../../config/firebase'
+import db from '@firebase/firestore'
 
 const state = {
     sort_by: 'id',

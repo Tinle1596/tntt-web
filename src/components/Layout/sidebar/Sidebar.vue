@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.sidebar">
-    <div>
-      <auth></auth>
+    <div>      
     </div>
       <sidebar-nav></sidebar-nav>
     </div>  

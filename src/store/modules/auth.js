@@ -1,61 +1,31 @@
-import db from '../../config/firebase'
-
-
 const state = {
-    user: {}
+    user: {},
+    status: false
 }
 
 // getters
 const getters = {
-    user: state => state.user,
-    loggedIn: state => 'uid' in state.user,
+    user(state) {
+        return state.user;
+    },
+    isSignedIn(state) {
+        return state.status;
+    }
 }
 
 // mutations
 const mutations = {
-    SET_USER: (state, payload) => {
-        state.user = payload
+    onAuthStateChanged(state, user) {
+        state.user = user;
     },
-    LOG_IN:() => {
-        const provider = new db.auth.GoogleAuthProvider();
-
-        db.auth().signInWithRedirect(provider);
-    },
-    LOG_OUT:() => {
-        db.auth().signOut();
+    onUserStatusChanged(state, status) {
+        state.status = status;
     }
-
-};
+}
 
 // actions
-const actions = {
-    retrieveCredentials: (context) => {               
-        db.auth().onAuthStateChanged(user => {            
-            if (user) {
-                const {
-                    displayName,
-                    email,
-                    photoURL,
-                    uid
-                } = user;
-                const cleanedUser = {
-                    displayName,
-                    email,
-                    photoURL,
-                    uid
-                };
-                context.commit('SET_USER', cleanedUser);
-            } else {
-                context.commit('SET_USER', {});
-            }
-        });
-    },
-    logIn: (context) => {
-        context.commit('LOG_IN')
-    },
-    logOut: (context) => {
-        context.commit('LOG_OUT')
-    }
+const actions = {    
+
 }
 
 export default {
