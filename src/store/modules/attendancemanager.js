@@ -1,5 +1,4 @@
-// initial state
-import db from '@firebase/firestore'
+import { db } from '../../config/firebase'
 
 const state = {
     sort_by: 'id',
@@ -122,8 +121,7 @@ const actions = {
                 .catch((error) => {
                     console.log('Error adding document ', error)
                 })
-        } else if (student.isActive === false) {
-
+        } else if (student.isActive === false) {        
             db.collection('attendance')
                 .where('studentId', '==', student.id)
                 .where('checkOut', '==', null)
