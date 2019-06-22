@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import firebase from "../../config/firebase.js";
 import { login, logout, onAuth } from "../../config/firebase.js";
 import { mapGetters } from "vuex";
 
