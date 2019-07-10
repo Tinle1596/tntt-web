@@ -5,7 +5,7 @@ const state = {
     sort_ascending: true,
     students: [],
     selectedAttendance: null,
-    searchWord: null
+    searchWord: null,    
 }
 
 const getters = {
@@ -32,7 +32,7 @@ const getters = {
             return filteredStudents;
         }
     },
-    getSearchWord: (state) => state.searchWord
+    getSearchWord: (state) => state.searchWord    
 }
 
 const mutations = {
