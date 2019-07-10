@@ -1,52 +1,23 @@
-<template>
-  <div id="app">    
-    <div :class="$style.container">
-    <router-view></router-view>    
-    </div>
-    <sidebar/>
-    <sidebar-toggle/>
-  </div>
+<template>  
+    <v-app id="inspire" dark>
+      <navigation></navigation>
+      <v-content>
+          <router-view></router-view>
+      </v-content>
+    </v-app>
 </template>
 
 <script>
-import Sidebar from './components/layout/sidebar/Sidebar'
-import SidebarToggle from './components/layout/sidebar/SidebarToggle'
+import Navigation from "./components/common/Navigation";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    Sidebar,
-    SidebarToggle
+    Navigation
   }
-}
+};
 </script>
 
 <style>
-    :root{
-    --accent-color: #66FCF1;
-    --primary-color: #1F2833;
-    --dark-color: #C5C6C7;
-  }
 
-  * {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-        background: transparent;
-    }
-</style>
-
-<style module>
-  .container{
-    position: fix;
-    margin: 0;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--primary-color);
-  }
 </style>
