@@ -56,20 +56,15 @@ const actions = {
         db.collection("students").onSnapshot(snapshot => {
             snapshot.docChanges().forEach(change => {
                 if (change.type === "added") {
-                    console.log("Added", change.doc.data());
                     const source = change.doc.metadata.hasPendingWrites ? 'Local' : 'Server';
                 }
                 if (change.type === "modified") {
-                    console.log("Modified", change.doc.data());
                     context.commit('TOGGLE_ATTENDANCE', {
                         id: change.doc.id,
                         isActive: change.doc.data().isActive,
                         timeStamp: change.doc.data().timeStamp
                     })
-                }
-                if (change.type === "removed") {
-                    console.log("Removed", change.doc.data());
-                }
+                }                
             });
         });
     },
@@ -114,10 +109,7 @@ const actions = {
                     checkIn: Date.now(),
                     checkOut: null,
                     eventDate: new Date().toLocaleDateString()
-                })
-                .then((docRef) => {
-                    console.log('Document added with ID: ', docRef.id)
-                })
+                })                
                 .catch((error) => {
                     console.log('Error adding document ', error)
                 })

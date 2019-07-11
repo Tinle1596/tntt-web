@@ -1,14 +1,13 @@
 <template>
-    <div id="attendance">
+    <div>
         <attendance-manager></attendance-manager>
     </div>
 </template>
 
 <script>
-import AttendanceManager from './attendance/attendancemanager/AttendanceManager.vue'
+import AttendanceManager from '../attendance/attendancemanager/AttendanceManager'
 
 export default {
-    name: 'Attendance',
     components: {
         AttendanceManager
     }

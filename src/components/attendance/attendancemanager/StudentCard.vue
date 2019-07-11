@@ -4,8 +4,8 @@
     <v-list three-line>
       <v-list-tile v-for="student in filteredSearchStudents" :key="student.id" avatar>
         <v-container fluid>
-          <v-layout align-start justify-start row>
-            <v-flex shrink pt-2 pr-2>
+          <v-layout align-start justify-start row py-1>
+            <v-flex shrink py-2 pr-3>
               <v-list-tile-avatar size="65">
                 <img src="https://i.imgur.com/y7oYbiP.jpg">
               </v-list-tile-avatar>

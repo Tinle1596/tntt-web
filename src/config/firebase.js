@@ -18,7 +18,7 @@ firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
 export function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithRedirect(provider);
+  firebase.auth().signInWithPopup(provider);
 }
 
 export function logout() {
