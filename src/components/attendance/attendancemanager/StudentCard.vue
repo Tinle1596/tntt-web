@@ -1,28 +1,34 @@
 <template>
   <div id="students">
-    <!-- TODO: Refactor List rendering for students. Maybe user cards instead? -->
-    <v-list three-line>
-      <v-list-tile v-for="student in filteredSearchStudents" :key="student.id" avatar>
-        <v-container fluid>
-          <v-layout align-start justify-start row py-1>
-            <v-flex shrink py-2 pr-3>
-              <v-list-tile-avatar size="65">
-                <img src="https://i.imgur.com/y7oYbiP.jpg">
-              </v-list-tile-avatar>
-            </v-flex>
-            <v-flex grow pa-1>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="student.firstName + ' ' + student.lastName"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="student.group"></v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-flex>
-            <v-flex shrink>
-              <v-switch :input-value="student.isActive" color="success" @change="toggleAttendance(student)"></v-switch>              
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-list-tile>
-    </v-list>
+    <v-container fluid>
+      <transition-group name="slide" tag="span">
+      <v-layout row wrap v-for="student in filteredSearchStudents" :key="student.id">
+        <v-flex pa-1>
+          <v-card flat max-height="100px">
+            <v-layout row wrap>
+              <v-flex shrink>
+                <v-avatar>
+                  <img src="https://i.imgur.com/y7oYbiP.jpg" />
+                </v-avatar>
+              </v-flex>
+              <v-flex grow pl-2>
+                <h3> {{ student.firstName + ' ' + student.lastName }} </h3>
+                <h5> {{ student.group }} </h5>
+              </v-flex>
+              <v-flex shrink clipped-right>
+                <v-switch 
+                  height="5px" 
+                  :input-value="student.isActive" 
+                  color="success" 
+                  @change="toggleAttendance(student)"
+                  ></v-switch>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-layout>
+      </transition-group>
+    </v-container>    
   </div>
 </template>
 
@@ -58,4 +64,35 @@ export default {
 </script>
 
 <style scoped>
+.v-card {
+  border-radius: 100px;
+}
+
+.slide-enter {
+    transform: translateY(500px);
+}
+
+.slide-enter-active {
+    transition: transform 0.7s ease-out;
+}
+
+.slide-enter-to {
+    transform: translateY(0px);
+}
+
+.slide-leave {
+    transform: translateX(0px);
+}
+
+.slide-leave-active {
+    transition: transform 0.9s ease-in;
+}
+
+.slide-leave-to {
+    transform: translateX(500px);
+}
+
+.slide-move {
+    transition: transform 2s;
+}
 </style>
