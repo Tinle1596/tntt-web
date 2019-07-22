@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.0.0-rc.19",
     "firebase": "^6.2.2",
     "gsap": "^2.1.1",
+    "npm": "^6.10.1",
     "vue": "^2.5.22",
     "vue-router": "^3.0.2",
     "vuetify": "^1.5.16",
