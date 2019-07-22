@@ -1,8 +1,8 @@
 <template>
   <div id="students">
-    <v-container fluid>
+    <v-container fluid>      
       <transition-group name="slide" tag="span">
-      <v-layout row wrap v-for="student in filteredSearchStudents" :key="student.id">
+      <v-layout row wrap v-for="student in students" :key="student.id">
         <v-flex pa-1>
           <v-card flat max-height="100px">
             <v-layout row wrap>
@@ -33,27 +33,18 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-//import attendanceButton from './common/AttendanceButton'
-
 export default {
   name: "Students",
-  props: {},
+  props: { students: Array },
   components: {
-    //attendanceButton
   },
   data() {
     return {};
   },
   created() {
-    this.$store.dispatch("initRealtimeListeners");
-    this.$store.dispatch("retrieveStudents");
+    
   },
-  computed: {
-    ...mapGetters(["filteredSearchStudents"]),
-    ...mapActions([
-      //'updateAttendance'
-    ])
+  computed: {    
   },
   methods: {
     toggleAttendance(student) {
@@ -67,7 +58,6 @@ export default {
 .v-card {
   border-radius: 100px;
 }
-
 .slide-enter {
     transform: translateY(500px);
 }
@@ -85,7 +75,7 @@ export default {
 }
 
 .slide-leave-active {
-    transition: transform 0.9s ease-in;
+    transition: transform 0.5s ease-in;
 }
 
 .slide-leave-to {
@@ -93,6 +83,6 @@ export default {
 }
 
 .slide-move {
-    transition: transform 2s;
+    transition: transform 1s;
 }
 </style>

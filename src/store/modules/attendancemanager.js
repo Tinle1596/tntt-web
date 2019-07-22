@@ -9,30 +9,24 @@ const state = {
 }
 
 const getters = {
-    filteredStudents: state => {
-        var attendance = state.selectedAttendance;
-
-        if (attendance === null) {
-            return state.students;
-        } else {
-            return state.students.filter(function (student) {
-                return student.isActive === state.selectedAttendance;
-            })
-        }
+    isActiveStudents: (state, getters) => {
+        return keyword => getters.filteredSearchStudents.filter(student => {
+            return student.isActive === keyword
+        });
     },
-    filteredSearchStudents: (state, getters) => {
+    filteredSearchStudents: state => {
         var searchWord = state.searchWord;
-        var filteredStudents = getters.filteredStudents;
+        var filteredSearchStudents = state.students;
 
         if (searchWord) {
-            return filteredStudents.filter((student) => {
+            return filteredSearchStudents.filter((student) => {
                 return student.firstName.toLowerCase().includes(searchWord);
             })
         } else {
-            return filteredStudents;
+            return filteredSearchStudents;
         }
     },
-    getSearchWord: (state) => state.searchWord    
+    getSearchWord: state => state.searchWord    
 }
 
 const mutations = {

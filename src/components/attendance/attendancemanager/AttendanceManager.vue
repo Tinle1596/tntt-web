@@ -1,22 +1,16 @@
 <template>
     <div id="attendance-manager">
-        <student-search></student-search>
-        <student-card></student-card>
-        <student-filter></student-filter>
+        <student-attendance-manager></student-attendance-manager>
     </div>
 </template>
 
 <script>
-import StudentSearch from './StudentSearch.vue'
-import StudentCard from './StudentCard.vue'
-import StudentFilter from './StudentFilter'
+import StudentAttendanceManager from './StudentAttendanceManager'
 
 export default {
     name: 'AttendanceManager',
     components: {
-        StudentSearch,
-        StudentCard,
-        StudentFilter
+        StudentAttendanceManager
     },
     data() {
         return {
