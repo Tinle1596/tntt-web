@@ -14,12 +14,12 @@
           <h2> {{ user.displayName}} </h2>
         </v-flex>
         <v-flex shrink xs>
-          <v-btn small round color="red darken-4" @click="doLogout()">Sign Out</v-btn>
+          <v-btn small rounded color="red darken-4" @click="doLogout()">Sign Out</v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap v-else key="logout">
         <v-flex>
-            <v-btn block round @click="doLogin()">Sign In</v-btn>
+            <v-btn block rounded @click="doLogin()">Sign In</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
