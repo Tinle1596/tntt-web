@@ -16,12 +16,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex>
-        <search></search>
-      </v-flex>
-    </v-layout>
-    <v-layout row wrap>
-      <v-flex>
+      <v-flex ma-2>
         <v-tabs-items v-model="tabs">
           <v-tab-item :value="'tab-allstudents'">
             <student-card :students="allStudents"></student-card>
@@ -35,6 +30,11 @@
         </v-tabs-items>
       </v-flex>
     </v-layout>
+    <v-footer absolute>
+      <v-flex>
+        <search></search>
+      </v-flex>
+    </v-footer>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
       floating
       label="search"
       prepend-inner-icon="search"
-      solo-inverted
+      solo
       class="my-input"
       v-model="searchWord"
     ></v-text-field>
