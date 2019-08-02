@@ -102,7 +102,7 @@ const actions = {
                     studentId: student.id,
                     checkIn: Date.now(),
                     checkOut: null,
-                    eventDate: new Date().toLocaleDateString()
+                    eventDate: new Date().toISOString().substr(0, 10)
                 })                
                 .catch((error) => {
                     console.log('Error adding document ', error)

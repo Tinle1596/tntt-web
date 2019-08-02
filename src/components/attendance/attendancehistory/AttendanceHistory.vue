@@ -1,36 +1,23 @@
 <template>
-    <div>
-        <v-card> Test from attendance history component </v-card>        
-    </div>
+  <div>
+      <attendance-history-manager></attendance-history-manager>
+  </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import AttendanceHistoryManager from './AttendanceHistoryManager'
 
-    export default {
-        name:'AttendanceViewer',
-        props: {
-            
-        },
-        data(){
-            return {
-                
-            };
-        },
-        created() {
-            this.$store.dispatch('retrieveTimestamps')
-        },
-        methods:{
-            
-        },
-        computed: {
-            ...mapGetters([
-                'timestamps'
-            ])
-        },
-    }
+export default {
+  name: "AttendanceHistory",
+  components:{
+      AttendanceHistoryManager
+  },
+  data() {
+    return {};
+  },
+  
+};
 </script>
 
 <style scoped>
-
 </style>
