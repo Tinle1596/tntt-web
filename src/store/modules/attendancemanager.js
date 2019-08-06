@@ -100,7 +100,9 @@ const actions = {
         if (student.isActive === true) {
             db.collection('attendance').add({
                     studentId: student.id,
-                    checkIn: Date.now(),
+                    studentFullName: student.firstName + ' ' + student.lastName,
+                    group: student.group,
+                    checkIn: new Date().toLocaleTimeString(),
                     checkOut: null,
                     eventDate: new Date().toISOString().substr(0, 10)
                 })                
@@ -116,9 +118,8 @@ const actions = {
                     querySnapshot.forEach(doc => {
                         if(doc.exists){
                             db.collection('attendance').doc(doc.id).update({
-                                checkOut: Date.now()
-                            })
-                            console.log('updated checkOut document', doc.id)                        
+                                checkOut: new Date().toLocaleTimeString()
+                            })                                                    
                         } else {
                             console.log('unable to update document')
                         }

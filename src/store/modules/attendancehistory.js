@@ -12,7 +12,7 @@ const state = {
 
 // getters
 const getters = {
-  timestamps: state => {
+  timestamps: state => {    
     return state.timestamps
   },
   currentDate: state => {
@@ -42,23 +42,6 @@ const mutations = {
 
 // actions
 const actions = {
-  // retrieveTimestamps: (context) => {
-  //   db.collection('attendance').get()
-  //   .then(querySnapshot => {
-  //     let tempTimestamps = []
-  //     querySnapshot.forEach(doc => {
-  //       const data = {
-  //         id: doc.id,
-  //         studentId: doc.studentId,
-  //         checkIn: doc.checkIn,
-  //         checkOut: doc.checkOut,
-  //         eventDate: doc.eventDate
-  //       }
-  //       tempTimestamps.push(data)
-  //     })
-  //     context.commit('RETRIEVE_TIMESTAMPS', tempTimestamps)
-  //   })
-  // },
   async updateCurrentDate({dispatch, commit}, date) {
     await dispatch('getTimestampsByDate', date)
     commit('UPDATE_CURRENT_DATE', date)
@@ -71,10 +54,11 @@ const actions = {
         querySnapshot.forEach(doc => {
           const data = {
             id: doc.id,
-            studentId: doc.studentId,
-            checkIn: doc.checkIn,
-            checkOut: doc.checkOut,
-            eventDate: doc.eventDate
+            studentId: doc.data().studentId,
+            studentFullName: doc.data().studentFullName,
+            checkIn: doc.data().checkIn,
+            checkOut: doc.data().checkOut,
+            eventDate: doc.data().eventDate
           }
           tempTimestamps.push(data)
         })

@@ -13,7 +13,12 @@
         <attendance-sparkline></attendance-sparkline>
       </v-flex>
     </v-layout>
-    <v-layout column wrap>{{timestamps}}</v-layout>
+    <v-layout column wrap>
+      <v-flex>
+        <attendance-table :timestamps="timestamps">
+        </attendance-table>
+      </v-flex>
+    </v-layout>
     <v-overlay :value="overlayStatus">
       <v-flex>
         <date-picker></date-picker>        
@@ -26,22 +31,21 @@
 import { mapGetters, mapActions, mapMutations} from 'vuex';
 import AttendanceSparkline from './AttendanceSparkline';
 import DatePicker from '../../common/DatePicker';
+import AttendanceTable from './AttendanceTable';
 
 export default {
   name: "AttendanceHistoryManager",
   props: {},
   components: {
     AttendanceSparkline,
-    DatePicker
+    DatePicker,
+    AttendanceTable
   },
   data() {
     return {
 
     };
-  },
-  // created() {
-  //   this.$store.dispatch("retrieveTimestamps");
-  // },
+  }, 
   methods: {
     ...mapActions(['toggleOverlay'])    
   },

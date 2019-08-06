@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-layout>
-      <v-date-picker v-model="date"></v-date-picker>
+      <v-date-picker v-model="date" show-current></v-date-picker>
     </v-layout>
     <v-layout row wrap align-end justify-center>
       <v-flex xs5 pt-1 mr-1>
