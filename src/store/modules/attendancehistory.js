@@ -56,6 +56,7 @@ const actions = {
             id: doc.id,
             studentId: doc.data().studentId,
             studentFullName: doc.data().studentFullName,
+            group: doc.data().group,
             checkIn: doc.data().checkIn,
             checkOut: doc.data().checkOut,
             eventDate: doc.data().eventDate

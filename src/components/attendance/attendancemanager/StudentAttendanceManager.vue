@@ -41,14 +41,12 @@
 <script>
 import Search from "./Search";
 import StudentCard from "./StudentCard";
-import StudentFilter from "./StudentFilter";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     Search,
     StudentCard,
-    StudentFilter
   },
   data() {
     return {

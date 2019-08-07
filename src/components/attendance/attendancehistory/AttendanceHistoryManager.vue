@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import AttendanceSparkline from './AttendanceSparkline';
 import DatePicker from '../../common/DatePicker';
 import AttendanceTable from './AttendanceTable';

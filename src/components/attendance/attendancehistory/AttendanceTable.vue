@@ -27,9 +27,6 @@
             timestamps: Array
         },
         components: {
-            convertedTimestamps() {
-
-            }
         },
         data() {
             return {
@@ -41,6 +38,7 @@
                         sortable: false,
                         value: 'studentFullName'                        
                     },
+                    { text: 'Group', value: 'group'},
                     { text: 'In', value: 'checkIn'},
                     { text: 'Out', value: 'checkOut'},
                     { text: 'Date', value: 'eventDate'},
