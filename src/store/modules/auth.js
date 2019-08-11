@@ -38,7 +38,10 @@ const mutations = {
         state.getUser = getUser;
     },
     SET_ALLUSERS(state, users) {
-        state.users = users;
+        state.users = users.data.users
+    },
+    SUCCESS_NOTIFICATION(state) {
+        // TODO: trigger notication on successful role assignment
     }
 }
 
@@ -56,7 +59,17 @@ const actions = {
             email: email
         }).then(result => {
             // call notification
+            //console.log(result)
+        })
+    },
+    
+    addAdminByUid: (context, uid) => {
+        const addAdmineRole = functions.httpsCallable('addAdminRoleByUid');
+        addAdmineRole({
+            uid: uid
+        }).then((result) => {
             console.log(result)
+            //context.commit('SUCCESS_NOTIFICATION')
         })
     },
     getUserByEmail: (context, email) => {
@@ -72,8 +85,7 @@ const actions = {
         const listAllUsers = functions.httpsCallable('listAllUsers');
         listAllUsers({
 
-        }).then(users => {
-            console.log(users)
+        }).then(users => {            
             context.commit('SET_ALLUSERS', users)
         })
     }

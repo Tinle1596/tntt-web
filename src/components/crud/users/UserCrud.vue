@@ -1,19 +1,21 @@
 <template>
   <div>
-    <v-text-field label="email" v-model="email"></v-text-field>
-    <v-btn color="success" @click="getUserByEmail(email)">get User</v-btn>
-    {{ getUser }}
+      <user-list :users="users"></user-list>          
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import UserList from './UserList'
 
     export default {
         data() {
             return {
                 email: ''
             }
+        },
+        components: {
+            UserList
         },
         methods: {
             addAdminByEmail: function(payload) {
@@ -32,7 +34,10 @@ import {mapGetters} from 'vuex'
                 'users',
                 'getUser'
             ])
-        }
+        },
+        created() {
+            this.$store.dispatch('listAllUsers')
+        },
     }
 </script>
 

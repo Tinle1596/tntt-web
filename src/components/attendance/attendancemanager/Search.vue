@@ -6,7 +6,6 @@
       label="search"
       prepend-inner-icon="search"
       solo
-      class="my-input"
       v-model="searchWord"
     ></v-text-field>
   </div>
