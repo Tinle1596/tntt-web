@@ -16,3 +16,21 @@ exports.addAdminRole = functions.https.onCall((data, context) => {
         return err;
     })
 })
+
+exports.getUserByEmail = functions.https.onCall((data, context) => {
+    //get user by email
+    return admin.auth().getUserByEmail(data.email).then(userRecord => {
+        return userRecord
+    }).catch(err => {
+        return err;
+    })
+})
+
+exports.listAllUsers = functions.https.onCall(context => {
+    return admin.auth().listUsers(1000)
+    .then(listUserResult => {
+        return listUserResult
+    }).catch(err => {
+        return err;
+    })
+})

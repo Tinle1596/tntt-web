@@ -1,6 +1,7 @@
 import firebase from '@firebase/app'
 import '@firebase/firestore'
 import '@firebase/auth'
+import '@firebase/functions'
 import store from '../store/index'
 
 const firebaseApp = firebase.initializeApp({
@@ -15,6 +16,7 @@ const firebaseApp = firebase.initializeApp({
 
 var db = firebaseApp.firestore();
 firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+var functions = firebase.functions();
 
 export function login() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -27,6 +29,11 @@ export function logout() {
 
 export function onAuth() {
   firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      user.getIdTokenResult().then(idTokenResult => {
+        user.admin = idTokenResult.claims.admin
+      })
+    }
     user = user ? user : {};
     store.dispatch("onAuthStateChanged", user);
     store.dispatch("onUserStatusChanged", user.uid ? true : false);
@@ -34,5 +41,6 @@ export function onAuth() {
 }
 
 export {
-  db  
+  db,
+  functions
 }
