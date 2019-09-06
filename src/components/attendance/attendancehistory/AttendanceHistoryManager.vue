@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout row wrap>
       <v-flex xs12 mx-1>
-        <v-btn rounded block @click="toggleOverlay" x-large>
+        <v-btn rounded block @click="toggleHistoryOverlay" x-large>
           <v-icon>mdi-calendar-search</v-icon>
           {{ currentDate }}
         </v-btn>
@@ -19,7 +19,7 @@
         </attendance-table>
       </v-flex>
     </v-layout>
-    <v-overlay :value="overlayStatus">
+    <v-overlay :value="historyOverlayStatus">
       <v-flex>
         <date-picker></date-picker>        
       </v-flex>
@@ -47,10 +47,10 @@ export default {
     };
   }, 
   methods: {
-    ...mapActions(['toggleOverlay'])    
+    ...mapActions(['toggleHistoryOverlay'])    
   },
   computed: {
-    ...mapGetters(['timestamps', 'currentDate', 'overlayStatus'])
+    ...mapGetters(['timestamps', 'currentDate', 'historyOverlayStatus'])
   },
   created(){
     this.$store.dispatch('getTimestampsByDate', new Date().toISOString().substr(0, 10))

@@ -7,7 +7,8 @@ const state = {
     user: {},
     users: [],
     status: false,
-    getUser: {}
+    getUser: {},
+    userOverlay:false
 }
 
 // getters
@@ -23,6 +24,9 @@ const getters = {
     },
     isSignedIn(state) {
         return state.status;
+    },
+    userOverlayStatus: state => {
+        return state.userOverlay
     }
 }
 
@@ -42,6 +46,10 @@ const mutations = {
     },
     SUCCESS_NOTIFICATION(state) {
         // TODO: trigger notication on successful role assignment
+    },
+    // UI MUTATIONS
+    TOGGLE_USER_OVERLAY: (state) => {
+        state.userOverlay = !state.userOverlay
     }
 }
 
@@ -88,9 +96,10 @@ const actions = {
         }).then(users => {            
             context.commit('SET_ALLUSERS', users)
         })
+    },
+    toggleUserOverlay(context) {
+        context.commit('TOGGLE_USER_OVERLAY')
     }
-
-
 }
 
 export default {

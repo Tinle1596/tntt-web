@@ -7,7 +7,7 @@ import {
 const state = {
   currentDate: new Date().toISOString().substr(0, 10),
   timestamps: [],
-  overlay: false
+  historyOverlay: false
 }
 
 // getters
@@ -18,8 +18,8 @@ const getters = {
   currentDate: state => {
     return state.currentDate
   },
-  overlayStatus: state => {
-    return state.overlay
+  historyOverlayStatus: state => {
+    return state.historyOverlay
   }
 }
 
@@ -31,12 +31,8 @@ const mutations = {
   UPDATE_CURRENT_DATE: (state, payload) => {
     state.currentDate = payload;
   },
-  TOGGLE_OVERLAY: (state) => {
-    if (state.overlay === false) {
-      state.overlay = true
-    } else {
-      state.overlay = false
-    }
+  TOGGLE_HISTORY_OVERLAY: (state) => {
+    state.historyOverlay = !state.historyOverlay  
   }
 }
 
@@ -68,10 +64,10 @@ const actions = {
   },
   async submitDate({dispatch, commit}, date) {
     await dispatch('updateCurrentDate', date)
-    commit('TOGGLE_OVERLAY')
+    commit('TOGGLE_HISTORY_OVERLAY')
   },
-  toggleOverlay(context) {
-    context.commit('TOGGLE_OVERLAY')
+  toggleHistoryOverlay(context) {
+    context.commit('TOGGLE_HISTORY_OVERLAY')
   }
 }
 

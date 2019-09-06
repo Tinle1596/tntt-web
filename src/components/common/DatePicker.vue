@@ -5,7 +5,7 @@
     </v-layout>
     <v-layout row wrap align-end justify-center>
       <v-flex xs5 pt-1 mr-1>
-        <v-btn color="error" @click="toggleOverlay" block rounded>Close</v-btn>
+        <v-btn color="error" @click="toggleHistoryOverlay" block rounded>Close</v-btn>
       </v-flex>
       <v-flex xs5 pt-1 ml-1>
         <v-btn color="success" @click="submitDate(date)" block rounded>Submit</v-btn>
@@ -25,7 +25,7 @@ export default {
   },
   computed: {},
   methods: {
-    ...mapActions(["updateCurrentDate", "toggleOverlay"]),
+    ...mapActions(["updateCurrentDate", "toggleHistoryOverlay"]),
 
     submitDate(date) {  
       this.$store.dispatch("submitDate", date);

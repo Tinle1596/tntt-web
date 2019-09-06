@@ -61,5 +61,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style <style lang="scss">
+.v-navigation-drawer {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 </style>
