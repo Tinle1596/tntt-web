@@ -20,7 +20,7 @@
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <custom-claim-chips :claims="Object.keys(user.customClaims)"></custom-claim-chips>
+          <custom-claim-chips :claims="Object.is(user.customClaims, undefined || null) ? ['no roles'] : Object.keys(user.customClaims)"></custom-claim-chips>
         </v-expansion-panel-content>
         <v-overlay :value="userOverlayStatus">
           <v-flex>
@@ -42,6 +42,7 @@ import { mapGetters, mapActions } from "vuex";
 import UserModal from "./UserModal";
 import CustomClaimChips from "./UserCustomClaimChips";
 
+//
 export default {
   props: {
     users: Array
@@ -51,10 +52,10 @@ export default {
     CustomClaimChips
   },
   computed: {
-    ...mapGetters(["userOverlayStatus"])
+    ...mapGetters(["userOverlayStatus"]),
   },
   methods: {
-    ...mapActions(["toggleUserOverlay"])
+    ...mapActions(["toggleUserOverlay"])   
   }
 };
 </script>

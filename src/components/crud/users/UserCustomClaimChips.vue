@@ -1,6 +1,6 @@
 <template>
     <div>         
-        <div v-for="claim in customClaims" :key="claim.uid">            
+        <div v-for="claim in claims" :key="claim.uid">            
             <v-chip>{{ claim }}</v-chip>
         </div>
     </div>
@@ -17,11 +17,7 @@
             }
         },
         computed: {
-            customClaims: claims => {
-                return claims.filter(claim => {
-                    return claim != null
-                })
-            }
+                        
         }        
     }
 </script>
