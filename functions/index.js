@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-
+  
 exports.addAdminRoleByEmail = functions.https.onCall((data, context) => {
         // get user and add custom claim (admin) by email
         return admin.auth().getUserByEmail(data.email).then(user => {
@@ -23,7 +23,31 @@ exports.addAdminRoleByEmail = functions.https.onCall((data, context) => {
             admin: true
         }).then(() => {
             return {
-                message: 'Success! User made admin by uid'
+                message: 'Success! User made admin.'
+            }
+        }).catch(err => {
+            return err;
+        })
+    }),
+    exports.addTeacherRoleByUid = functions.https.onCall((data, context) => {
+        // get user and add custom claim (teacher) by uid    
+        return admin.auth().setCustomUserClaims(data.uid, {
+            teacher: true
+        }).then(() => {
+            return {
+                message: 'Success! User made teacher.'
+            }
+        }).catch(err => {
+            return err;
+        })
+    }),
+    exports.addParentRoleByUid = functions.https.onCall((data, context) => {
+        // get user and add custom claim (admin) by uid    
+        return admin.auth().setCustomUserClaims(data.uid, {
+            parent: true
+        }).then(() => {
+            return {
+                message: 'Success! User made parent.'
             }
         }).catch(err => {
             return err;

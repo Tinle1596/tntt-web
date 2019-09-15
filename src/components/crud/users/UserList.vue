@@ -21,12 +21,9 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <custom-claim-chips :claims="Object.is(user.customClaims, undefined || null) ? ['no roles'] : Object.keys(user.customClaims)"></custom-claim-chips>
-        </v-expansion-panel-content>
-        <v-overlay :value="userOverlayStatus">
-          <v-flex>
-            <user-modal :user="user"></user-modal>
-          </v-flex>
+          <v-overlay :value="userOverlayStatus">          
         </v-overlay>
+        </v-expansion-panel-content>        
       </v-expansion-panel>
     </v-expansion-panels>
     <v-footer absolute>
@@ -39,7 +36,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import UserModal from "./UserModal";
+import EditUser from "./EditUser";
 import CustomClaimChips from "./UserCustomClaimChips";
 
 //
@@ -48,7 +45,7 @@ export default {
     users: Array
   },
   components: {
-    UserModal,
+    EditUser,
     CustomClaimChips
   },
   computed: {

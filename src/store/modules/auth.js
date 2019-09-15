@@ -60,20 +60,70 @@ const actions = {
     },
     onUserStatusChanged: (context, status) => {
         context.commit('ON_USER_STATUS_CHANGED', status)
+    },    
+    addRoleByUid: (context, uid, role) => {
+        const addAdminRole = functions.httpsCallable('addAdminRoleByUid');
+        const addTeacherRole = functions.httpsCallable('addTeacherRoleByUid');
+        const addParentRole = functions.httpsCallable('addParentRoleByUid');
+        console.log(uid)
+
+        // switch(role) {
+        //     case "Admin": {
+        //         addAdminRole({
+        //             uid: uid
+        //         }).then((result) => {
+        //             console.log(result);   
+        //             //context.commit('SUCCESS_NOTIFICATION')
+        //         })
+        //         break;
+        //     }
+        //     case "Teacher": {
+        //         addTeacherRole({
+        //             uid: uid
+        //         }).then((result) => {
+        //             console.log(result);
+        //             //context.commit('SUCCESS_NOTIFICATION')
+        //         })
+        //         break;
+        //     }
+        //     case "Parent": {
+        //         addParentRole({
+        //             uid:uid
+        //         }).then((result) => {
+        //             console.log(result);
+        //             //context.commit('SUCCESS_NOTIFICATION')
+        //         })
+        //         break;
+        //     }
+        //     default: {
+        //         console.log("No such role found")
+        //         console.log(role)
+        //         //context.commit('Error_notification')
+        //     }
+        // }
+        
     },
-    addAdminByEmail: (context, email) => {
-        const addAdminRole = functions.httpsCallable('addAdminRole');
+    addAdminByUid: (context, uid) => {
+        const addAdminRole = functions.httpsCallable('addAdminRoleByUid');
         addAdminRole({
-            email: email
-        }).then(result => {
-            // call notification
-            //console.log(result)
+            uid: uid
+        }).then((result) => {
+            console.log(result)
+            //context.commit('SUCCESS_NOTIFICATION')
         })
     },
-    
-    addAdminByUid: (context, uid) => {
-        const addAdmineRole = functions.httpsCallable('addAdminRoleByUid');
-        addAdmineRole({
+    addTeacherByUid: (context, uid) => {
+        const addTeacherRole = functions.httpsCallable('addTeacherRoleByUid');
+        addTeacherRole({
+            uid: uid
+        }).then((result) => {
+            console.log(result)
+            //context.commit('SUCCESS_NOTIFICATION')
+        })
+    },
+    addParentByUid: (context, uid) => {
+        const addParentRole = functions.httpsCallable('addParentRoleByUid');
+        addParentRole({
             uid: uid
         }).then((result) => {
             console.log(result)

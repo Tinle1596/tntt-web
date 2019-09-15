@@ -30,7 +30,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import AttendanceSparkline from './AttendanceSparkline';
-import DatePicker from '../../common/DatePicker';
+import DatePicker from './DatePicker'
 import AttendanceTable from './AttendanceTable';
 
 export default {
