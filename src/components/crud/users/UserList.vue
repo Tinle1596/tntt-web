@@ -13,17 +13,28 @@
               <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
-              <v-btn icon @click="toggleUserOverlay">
-                <v-icon>edit</v-icon>
-              </v-btn>
+              <custom-claim-chips :claims="nullCheckCustomClaims(user.customClaims)"></custom-claim-chips>
             </v-list-item-action>
           </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <custom-claim-chips :claims="Object.is(user.customClaims, undefined || null) ? ['no roles'] : Object.keys(user.customClaims)"></custom-claim-chips>
-          <v-overlay :value="userOverlayStatus">          
-        </v-overlay>
-        </v-expansion-panel-content>        
+          <v-container>
+            <v-row>
+              <v-col cols="9">
+                <v-select
+                  :items="roles"
+                  item-text="text"
+                  item-value="value"               
+                  v-model="currentRole"
+                  label="select role"
+                ></v-select>
+              </v-col>
+              <v-col cols="3">
+                <v-btn color="success" @click="addRoleByUid(user.uid, currentRole)">Save</v-btn>
+              </v-col>
+            </v-row>
+          </v-container>          
+        </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
     <v-footer absolute>
@@ -35,14 +46,19 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions} from "vuex";
 import EditUser from "./EditUser";
 import CustomClaimChips from "./UserCustomClaimChips";
 
-//
 export default {
   props: {
-    users: Array
+    users: Array,
+  },
+  data() {
+    return {
+      roles: ["Admin", "Teacher", "Parent"],
+      currentRole: null
+    }
   },
   components: {
     EditUser,
@@ -51,8 +67,13 @@ export default {
   computed: {
     ...mapGetters(["userOverlayStatus"]),
   },
-  methods: {
-    ...mapActions(["toggleUserOverlay"])   
+  methods: {            
+    addRoleByUid(uid, role){
+      this.$store.dispatch('addRoleByUid', [uid, role])
+    },    
+    nullCheckCustomClaims(customClaims){
+      return Object.is(customClaims, undefined || null) ? ['no roles'] : Object.keys(customClaims)
+    }
   }
 };
 </script>
