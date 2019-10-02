@@ -29,11 +29,15 @@ export function logout() {
 
 export function onAuth() {
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      user.getIdTokenResult().then(idTokenResult => {
-        user.admin = idTokenResult.claims.admin
-      })
-    }
+    if (user) {      
+      return user.reload().then(() => {        
+        return user.getIdTokenResult(true).then((idTokenResult) =>{          
+          user.claims = idTokenResult.claims;          
+          store.dispatch("onAuthStateChanged", user);
+          store.dispatch("onUserStatusChanged", user.uid ? true : false);
+        });
+      })      
+    }    
     user = user ? user : {};
     store.dispatch("onAuthStateChanged", user);
     store.dispatch("onUserStatusChanged", user.uid ? true : false);
