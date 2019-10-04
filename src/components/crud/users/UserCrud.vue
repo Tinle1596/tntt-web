@@ -17,13 +17,7 @@ import UserList from './UserList'
         components: {
             UserList
         },
-        methods: {
-            addAdminByEmail: function(payload) {
-                this.$store.dispatch('addAdminByEmail', payload)
-            },
-            getUserByEmail: function(payload) {
-                this.$store.dispatch('getUserByEmail', payload)
-            },
+        methods: {            
             getAllUsers: function() {
                 this.$store.dispatch('listAllUsers')
             }
