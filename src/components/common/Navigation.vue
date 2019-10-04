@@ -41,19 +41,29 @@ export default {
       link: 1,
       links: [
         {
-          icon: "home",
+          icon: "mdi-home",
           text: "Home",
           route: "/"
         },
         {
-          icon: "how_to_reg",
+          icon: "mdi-account-check",
           text: "Attendance Manager",
           route: "/attendance/manager"
         },
         {
-          icon: "assignment_ind",
+          icon: "mdi-calendar-account",
           text: "Attendance History",
           route: "/attendance/history"
+        },
+        {
+          icon: "mdi-account-edit",
+          text: "Manage User",
+          route: '/manage/users'
+        },
+        {
+          icon:'mdi-account-edit-outline',
+          text: 'Manage Students',
+          route: '/manage/students'          
         }
       ]
     };
@@ -61,7 +71,7 @@ export default {
 };
 </script>
 
-<style <style lang="scss">
+<style lang="scss">
 .v-navigation-drawer {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
