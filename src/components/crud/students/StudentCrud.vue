@@ -1,83 +1,146 @@
 <template>
-    <div>
-         <v-data-table
-         :headers="headers"
-         :items="getStudents"
-         :items-per-page="10"
-         >
-         <template v-slot:top>
-             <v-toolbar flat color="white">
-                 <v-toolbar-title>Mange Students</v-toolbar-title>
-                 <v-divider
-                 class="mx-4"
-                 inset
-                 vertical
-                 ></v-divider>
-                 <v-spacer></v-spacer>
-                 <v-dialog></v-dialog>
-             </v-toolbar>
-         </template>
-         </v-data-table>
-    </div>
+  <div>
+    <v-data-table
+      :headers="headers"
+      :items="students"
+      sort-by="calories"
+      class="elevation-1"
+    >
+      <template v-slot:top>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-divider
+            class="mx-4"
+            inset
+            vertical
+          ></v-divider>
+          <v-spacer></v-spacer>
+          <v-dialog v-model="dialog" max-width="500px">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ formTitle }}</span>
+              </v-card-title>
+  
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.firstName" label="Fist Name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.lastName" label="Last Name"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.sex" label="Sex"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.group" label="Nganh"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="4">
+                      <v-text-field v-model="editedItem.phoneNumber" label=""></v-text-field>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+  
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+      </template>
+      <template v-slot:item.action="{ item }">
+        <v-icon
+          small
+          class="mr-2"
+          @click="editItem(item)"
+        >
+          edit
+        </v-icon>
+        <v-icon
+          small
+          @click="deleteItem(item)"
+        >
+          delete
+        </v-icon>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 
-    export default {
-        data() {
-            return {
-                headers: [
-                    {
-                        text: 'First Name',
-                        align: 'left',
-                        sortable: true,
-                        value: 'firstName'
-                    },
-                    {
-                        text: 'Last Name',
-                        align: 'left',
-                        sortable: true,
-                        value: 'lastName'
-                    },
-                    {
-                        text: 'Nganh',
-                        align: 'left',
-                        sortable: true,
-                        value: 'group'
-                    },
-                    {
-                        text: 'Sex',
-                        align: 'left',
-                        sortable: false,
-                        value: 'sex'
-                    },
-                    {
-                        text: 'Phone Number',
-                        align: 'left',
-                        sortable: false,
-                        value: 'phoneNumber'
-                    }
-                ],
-            }
-        },
-        components:{
-
-        },
-        computed:{
-            ...mapGetters([
-                'getStudents'
-            ])  
-        },
-        methods:{
-
-        },        
-        created(){
-            this.$store.dispatch('getStudents')
-        }        
+export default {
+  data:() => ({
+    dialog: false,
+    headers: [
+      {text: 'First Name', align: 'left', sortable: true, value: 'firstName'},
+      {text: 'Last Name', align: 'left', sortable: true, value: 'lastName'},
+      {text: 'Sex', sortable: true, value: 'sex'},
+      {text: 'Nganh', sortable: true, value: 'group'},
+      {text: 'Phone Number', sortable: false, value: 'phoneNumber'}
+    ],
+    editedIndex: -1,
+    editedItem: {
+      firstName: '',
+      lastName: '',
+      group: '',
+      sex: '',
+      phoneNumber: ''
+    },
+    defaultItem: {
+      firstName: '',
+      lastName: '',
+      group: '',
+      sex: '',
+      phoneNumber: ''
     }
+  }),
+  components: {},
+  computed: {
+    ...mapGetters({
+      students :'getStudents'
+    }),
+    formTitle() {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close()
+    }
+  },
+  methods: {
+    editItem(item) {
+      this.editedIndex = this.students.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+    deleteItem() {
+      //Vuex delete action
+    },
+    close(){
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editeditem = -1}, 300)
+      },
+    save(){
+
+    }
+    }, 
+  created() {
+      this.$store.dispatch('getStudents')
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>
